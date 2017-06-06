@@ -1,0 +1,7 @@
+$("#comments-empty").remove();
+<% if @comment.parent_id.blank? %>
+  $("#add_comment_link").hide().after('<%= j render("form") %>');
+<% else %>
+  $("#comment-<%= @comment.parent_id %>").after('<%= j render("form") %>');
+<% end %>
+$("#new_comment_body").markdown({autofocus:false,savable:false});

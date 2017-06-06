@@ -1,0 +1,12 @@
+<div style="padding-top:20px;" id="comments">
+  <% if obj.root_comments.any? %>
+    <% obj.root_comments.order(created_at: :desc).limit(3).each do |comment| %>
+      <%= render partial: 'comments/comment', locals: {comment: comment, reply: false} %>
+    <% end %>
+  <% else %>
+    <%= render partial: 'comments/empty' %>
+  <% end %>
+</div>
+
+<%= link_to "View all #{obj.root_comments.count} comments", [obj, :comments], id: 'view_more_link' %>
+<%= link_to 'Add Comment', new_polymorphic_path([obj, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if current_user && current_user.can_comment? %>

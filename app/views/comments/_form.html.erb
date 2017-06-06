@@ -1,0 +1,12 @@
+<%= simple_form_for [@commentable, @comment], remote: true do |f| %>
+  <%= content_tag :div, class: 'clearfix', style: 'margin-bottom:20px;' do %>
+    <%= content_tag :div do %>
+      Reply on <i><%= @comment.parent.body %></i>
+    <% end if @comment.parent %>
+
+    <%= f.hidden_field :parent_id, value: @comment.parent_id %>
+    <%= f.input :body, label: false, input_html: {id: 'new_comment_body', class: 'col-xs-12', rows: '8', style: 'margin-bottom: 10px;'} %>
+
+    <%= f.submit 'Post', class: 'btn btn-primary pull-right' %>
+  <% end %>
+<% end %>

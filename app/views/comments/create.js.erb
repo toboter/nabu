@@ -1,0 +1,7 @@
+$('#new_comment').remove();
+$('#add_comment_link').show();
+<% if @comment.root? %>
+  $('#comments').append('<%= j render(partial: 'comments/comment', locals: {comment: @comment, reply: true}) %>');
+<% else %>
+  $('#comment-<%= @comment.root.id %>').after('<%= j render(partial: 'comments/comment', locals: {comment: @comment, reply: true}) %>');
+<% end %>

@@ -1,0 +1,40 @@
+<% title "Comments on #{link_to(@commentable.name, @commentable)}".html_safe %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div style="" id="comments">
+      <% if @comments.any? %>
+        <% @comments.order(created_at: :desc).each do |comment| %>
+          <%= render partial: 'comments/comment', locals: {comment: comment, reply: true} %>
+          <%= content_tag :div, id: "comment-#{comment.id}-children" do %>
+            <% comment.children.order(created_at: :asc).each do |child| %>
+              <%= render partial: 'comments/comment', locals: {comment: child, reply: false} %>
+            <% end if comment.children.any? %>
+            <div class="clearfix" style="margin-bottom:20px;">
+
+              </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= render 'empty' %>
+      <% end %>
+    </div>
+    <div id="comment-post">
+      <%= link_to 'Add Comment', new_polymorphic_path([@commentable, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if current_user && current_user.can_comment? %>
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <%= render partial: 'subjects/show', locals: {subject: @commentable} %>
+
+    <% if @commentable.respond_to?(:parent) && @commentable.parent.present? && @commentable.parent.root_comments.any? %>
+      <h4>Comments on <%= @commentable.parent.name %></h4>
+      <div class="text-muted">
+        <% @commentable.parent.root_comments.order(created_at: :desc).limit(3).each do |comment| %>
+          <%= render partial: 'comments/comment', locals: {comment: comment, reply: false} %>
+        <% end %>
+      </div>
+      <%= link_to "View all #{@commentable.parent.root_comments.count} comments", [@commentable.parent, :comments], id: 'view_more_link' %>
+    <% end %>
+
+  </div>
