@@ -6,7 +6,7 @@ gem 'nabu', git: 'https://github.com/toboter/nabu.git'
 gem 'rails-bootstrap-markdown'
 ```
 
-rails nabu:install:migrations
+rails nabu_engine:install:migrations
 
 add 'include Nabu' to the model you like comments on.
 (The model needs a 'name' attribute)
