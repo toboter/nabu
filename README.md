@@ -1,12 +1,15 @@
 # Nabu
 
-gem 'nabu'
+## Installation
+```ruby
+gem 'nabu', git: 'https://github.com/toboter/nabu.git'
 gem 'rails-bootstrap-markdown'
+```
 
 rails nabu:install:migrations
 
-add 'include Nabu' to commentable model
-The model needs a 'name' attribute
+add 'include Nabu' to the model you like comments on.
+(The model needs a 'name' attribute)
 
 you will need a current_user object
 
