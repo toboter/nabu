@@ -11,7 +11,7 @@
       <%= content_tag :span, class: "small pull-right" do %>
         <% unless comment.child? %>
           <%= link_to pluralize(comment.descendants.count, 'reply'), polymorphic_path([comment.commentable, :comments], anchor: "comment-#{comment.id}") %>
-          <% if current_user && current_user.can_comment? %> 
+          <% if can_comment? %> 
             <%= ' | ' if reply %>
             <%= link_to 'reply', new_polymorphic_path([comment.commentable, :comment], parent_id: comment.id), 
                 remote: true,
@@ -19,7 +19,7 @@
                 id: "add_comment_link_#{comment.id}" if reply %>
           <% end %>
         <% end %>
-        <% if current_user && current_user.can_comment? %>
+        <% if can_comment? %>
           <%= ' | ' unless comment.child? %>
           <%= link_to('remove', [comment.commentable, comment], remote: true, method: :delete, data: { confirm: 'Are you sure? (All comments in this thread will remain but unthreaded)' }) %>
         <% end %>

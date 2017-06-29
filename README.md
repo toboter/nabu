@@ -13,7 +13,7 @@ add 'include Nabu' to the model you like comments on.
 
 you will need a current_user object
 
-add a method for 'can_comment?' to your user model
+add a helper method for 'can_comment?' 
 
 add
 '//= require bootstrap-markdown-bundle' to appplication.js

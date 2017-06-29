@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <div id="comment-post">
-      <%= link_to 'Add Comment', new_polymorphic_path([@commentable, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if current_user && current_user.can_comment? %>
+      <%= link_to 'Add Comment', new_polymorphic_path([@commentable, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if can_comment? %>
     </div>
   </div>
   <div class="col-md-6">

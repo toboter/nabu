@@ -9,4 +9,4 @@
 </div>
 
 <%= link_to "View all #{obj.root_comments.count} comments", [obj, :comments], id: 'view_more_link' %>
-<%= link_to 'Add Comment', new_polymorphic_path([obj, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if current_user && current_user.can_comment? %>
+<%= link_to 'Add Comment', new_polymorphic_path([obj, :comment]), remote: true, id: 'add_comment_link', class: 'btn btn-sm btn-success pull-right' if can_comment? %>
