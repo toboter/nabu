@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
     before_action :set_commentable
-    before_action :authorize, except: :index
+    before_action :authorize_comments, except: :index
 
     def index
       @comments = @commentable.root_comments
@@ -58,6 +58,10 @@ class CommentsController < ApplicationController
       # Never trust parameters from the scary internet, only allow the white list through.
       def comment_params
         params.require(:comment).permit(:title, :body, :subject, :parent_id)
+      end
+
+      def authorize_comments
+        redirect_to main_app.root_url, alert: "Not authorized. Please sign in." unless current_user && (current_user.app_commentator || current_user.app_admin)
       end
 
 end

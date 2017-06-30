@@ -1,7 +1,7 @@
 <%= content_tag :div, style: "#{ 'padding-left:30px;' if comment.child? }" do %>
   <%= content_tag :div, class: "panel panel-default comment", id: "comment-#{comment.id}" do %>
     <%= content_tag :div, class: 'panel-heading' do %>
-      <strong><%= comment.commentator.name %></strong>
+      <strong><%= comment.commentator.name.present? ?comment.commentator.name : "no name given (id: #{comment.commentator.uid})" %></strong>
       <span class="small pull-right">
         <strong><%= distance_of_time_in_words(Time.now, comment.created_at) %> ago</strong>
       </span>
