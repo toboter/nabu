@@ -1,4 +1,4 @@
-<% title "Comments on #{link_to(@commentable.name, @commentable)}".html_safe %>
+<% title "Comments on #{@commentable.name}" %>
 
 <div class="row">
   <div class="col-md-6">
@@ -25,7 +25,7 @@
   </div>
   <div class="col-md-6">
 
-    <%= render partial: 'subjects/show', locals: {subject: @commentable} %>
+    <%= render partial: "#{@commentable.class.name.downcase.pluralize}/show", locals: {@commentable.class.name.downcase.to_sym => @commentable} %>
 
     <% if @commentable.respond_to?(:parent) && @commentable.parent.present? && @commentable.parent.root_comments.any? %>
       <h4>Comments on <%= @commentable.parent.name %></h4>

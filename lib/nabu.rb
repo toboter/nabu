@@ -1,4 +1,5 @@
 require "nabu/engine"
+require "closure_tree"
 
 module Nabu
   extend ActiveSupport::Concern
